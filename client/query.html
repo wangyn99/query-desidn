@@ -1,0 +1,87 @@
+<head>
+  <title>Queries design</title>
+</head>
+
+<body>
+	<div class="container" id="main-pane">
+		<header class="navbar">
+			<div class="navbar-inner"><h3>Questions</h3></div>
+		</header>
+		<div id="side-pane">
+			{{> questionType}}
+		</div>
+		<div>
+		{{> questions}}
+	</div>
+	</div>
+</body>
+
+<template name="questionType">
+	<div id="questionTypes">
+		<ul>
+			<li>
+				<h4>多选问题</h4>
+					{{#if new_more_ans}}
+						<input type="text" id="add-question1" value=" " />
+					{{else}}
+						<div class="btn btn-default" id="btnNewMore">&plus;</div>
+					{{/if}}
+					<br/><br/>
+			</li>
+			<li>
+				<h4>单选问题</h4>
+					{{#if new_one_ans}}
+						<input type="text" id="add-question2" value=" " />
+					{{else}}
+						<div class="btn btn-default" id="btnNewOne">&plus;</div>
+					{{/if}}
+					<br/><br/>
+			</li>
+			<li>
+				<h4>问答题</h4>
+					{{#if new_free_ans}}
+						<input type="text" id="add-question3" value=" " />
+					{{else}}
+						<div class="btn btn-default" id="btnNewFree">&plus;</div>
+					{{/if}}
+					<br/><br/>
+			</li>
+		</ul>
+	</div>
+</template>
+
+
+<template name="questions">
+	<div id="questions">
+		<ol>
+		{{#each ques}}
+			{{#if more_answers}}
+			<li><form action="" method="get">{{question}}<br/><br/>
+				{{#each item}}
+				<label><input type="checkbox" value=""/>{{this}}</label>
+				{{/each}}
+			</form></li>
+			<br/>
+			<br/>
+			{{/if}}
+			{{#if one_answer}}
+			<li><form action="" method="get">{{question}}<br/><br/>
+				{{#each item}}
+				<label><input type="radio" value=""/>{{this}}</label>
+				{{/each}}
+			</form></li>
+			<br/>
+			<br/>
+			{{/if}}
+			{{#if free_answer}}
+			<li><form action="" method="get">{{question}}<br/><br/>
+				<input type="text"  value=" " />
+			</form></li>
+			<br/>
+			<br/>
+			{{/if}}
+			
+		{{/each}}
+	</ol>
+</div>
+</template>
