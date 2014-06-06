@@ -5,9 +5,10 @@ Session.setDefault("adding_type1",false);
 Session.setDefault("adding_type2",false);
 Session.setDefault("adding_type3",false);
 
+Meteor.subscribe("hosquestions");
 
 Template.questions.ques = function(){
-	return Questions.find();
+	return hosQuestions.find();
 };
 
 Template.questions.more_answers = function(){
@@ -37,7 +38,7 @@ Template.questionType.events({
     Session.set("adding_type1",true);
     Meteor.flush();
     //set the focus onto the input box
-    focusText(t.find("#add-question1"));
+    focusText(t.find("#add-question1"),"请输入要添加的问题");
   },
    'keyup #add-question1':function(e,t){
     //输入完毕，按下enter键
@@ -45,11 +46,7 @@ Template.questionType.events({
       var catVal = String(e.target.value||"");
        //checks to see if the input field has any value in it
       if(catVal){
-        //使用空格对输入数据进行分割
-        var questionVal = catVal.split(" ");
-        var question = questionVal[0];
-        var itemVar = questionVal.slice(1);
-        Questions.insert({type:"1",question:question,items:itemVar});
+        hosQuestions.insert({type:"1",question:catVal,items:null});
         Session.set('adding_type1',false);
       }
     }
@@ -61,7 +58,7 @@ Template.questionType.events({
     Session.set("adding_type2",true);
     Meteor.flush();
     //set the focus onto the input box
-    focusText(t.find("#add-question2"));
+    focusText(t.find("#add-question2"),"请输入要添加的问题");
   },
    'keyup #add-question2':function(e,t){
     //输入完毕，按下enter键
@@ -69,10 +66,7 @@ Template.questionType.events({
       var catVal = String(e.target.value||"");
        //checks to see if the input field has any value in it
       if(catVal){
-        var questionVal = catVal.split(" ");
-        var question = questionVal[0];
-        var itemVar = questionVal.slice(1);
-        Questions.insert({type:"2",question:question,items:itemVar});
+        hosQuestions.insert({type:"2",question:catVal,items:null});
         Session.set('adding_type2',false);
       }
     }
@@ -84,7 +78,7 @@ Template.questionType.events({
     Session.set("adding_type3",true);
     Meteor.flush();
     //set the focus onto the input box
-    focusText(t.find("#add-question3"));
+    focusText(t.find("#add-question3"),"请输入要添加的问题");
   },
    'keyup #add-question3':function(e,t){
     //输入完毕，按下enter键
@@ -92,7 +86,7 @@ Template.questionType.events({
       var catVal = String(e.target.value||"");
        //checks to see if the input field has any value in it
       if(catVal){
-        Questions.insert({type:"3",question:catVal,items:[]});
+        hosQuestions.insert({type:"3",question:catVal,items:null});
         Session.set('adding_type3',false);
       }
     }
@@ -101,9 +95,8 @@ Template.questionType.events({
     Session.set('adding_type3',false);
   }
 });
-  
-
-function focusText(i){
+function focusText(i,val){
   i.focus();
+  i.value = val?val:"";
   i.select();
 };

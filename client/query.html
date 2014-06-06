@@ -3,16 +3,16 @@
 </head>
 
 <body>
-	<div class="container" id="main-pane">
-		<header class="navbar">
-			<div class="navbar-inner"><h3>Questions</h3></div>
-		</header>
-		<div id="side-pane">
-			{{> questionType}}
-		</div>
-		<div>
+	<div id="main-pane">
+    <div style="float: right; margin-right :20px;">
+		{{> loginButtons align="right"}}
+	</div>
+		<h3>题目</h3>
 		{{> questions}}
 	</div>
+	<div id="side-pane">
+		<h3>问题类型</h3>
+		{{> questionType}}
 	</div>
 </body>
 
@@ -53,34 +53,40 @@
 
 <template name="questions">
 	<div id="questions">
+		<p class="warining"><em>对题目进行编辑前请先选中该题目</em></p>
 		<ol>
 		{{#each ques}}
-			{{#if more_answers}}
-			<li><form action="" method="get">{{question}}<br/><br/>
-				{{#each item}}
-				<label><input type="checkbox" value=""/>{{this}}</label>
-				{{/each}}
-			</form></li>
-			<br/>
-			<br/>
-			{{/if}}
-			{{#if one_answer}}
-			<li><form action="" method="get">{{question}}<br/><br/>
-				{{#each item}}
-				<label><input type="radio" value=""/>{{this}}</label>
-				{{/each}}
-			</form></li>
-			<br/>
-			<br/>
-			{{/if}}
-			{{#if free_answer}}
-			<li><form action="" method="get">{{question}}<br/><br/>
-				<input type="text"  value=" " />
-			</form></li>
-			<br/>
-			<br/>
-			{{/if}}
-			
+			<li id="question">
+				<div class="btn btn-inverse" id="btnquestion">{{question}}</div>
+				{{> modify_question}}
+				<br/>
+				<br/>
+				{{#if more_answers}}
+					 {{#each item}}
+            <div class="answer-list">
+              <form class="form-inline" role="form">
+					  	<label><input type="checkbox" value=""/>{{this}}</label>
+              <button type="button" class="close delete_item" id="{{this}}">x</button>
+              </form>
+            </div>
+					{{/each}}
+				{{/if}}
+
+				{{#if one_answer}}
+					{{#each item}}
+            <div class="answer-list">
+              <form class="form-inline" role="form">
+					   	<label><input type="radio" value=""/>{{this}}	</label>
+					   	<button type="button" class="close delete_item" id="{{this}}">x</button>
+              </form>
+           </div>
+					{{/each}}
+				{{/if}}
+
+				{{#if free_answer}}
+					<label><input type="text"  value=" " /></label>
+				{{/if}}
+			</li><br/>
 		{{/each}}
 	</ol>
 </div>
