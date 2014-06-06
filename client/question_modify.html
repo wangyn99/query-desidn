@@ -1,0 +1,13 @@
+<template name="modify_question">
+	{{#if modify_question}}
+		<input type="text" class="edit_modify_question" id="edit-question" value=" " />
+	{{else}}
+		<div class="modifyques btn btn-default" >修改问题</div>
+	{{/if}}
+		<div class="deleteques btn btn-default">删除问题</div>
+		{{#if add_answer}}
+		<input type="text" class="editanswer" id="edit-new-answer" value=" " />
+	{{else}}
+		<div class="addanswer btn btn-default">添加新答案选项</div>
+	{{/if}}
+</template>
