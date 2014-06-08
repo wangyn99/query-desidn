@@ -1,13 +1,79 @@
-<template name="modify_question">
-	{{#if modify_question}}
-		<input type="text" class="edit_modify_question" id="edit-question" value=" " />
+<template name="design">
+  <div id="main-pane">
+  	<h3>题目</h3>
+		{{> question_design}}
+  </div>
+  <div id="side-pane">
+		<h3>问题类型</h3>
+		{{> questionType}}
+	</div>
+</template>
+
+<template name="questionType">
+	<ul>
+		{{#each type}}
+			<li>
+				<div class="plus btn btn-default" id="{{typevalue}}">
+					{{typename}}
+				</div><br/><br/>
+			</li>
+		{{/each}}
+		{{#if addquestion}}
+		<input type="text" id="add-question" value=" " />
+		{{else}}
+		<br/>
+		{{/if}}
+	</ul>
+</template>
+
+<template name="question_design">
+	<em>点击题目或选项可以对其进行编辑，点击X号可以删除，点击+按钮可以增加选项</em>
+	<ol>
+		{{#each ques}}
+			{{> question}}
+		{{/each}}
+	</ol>
+</template>
+
+<template name="question">
+	<br/>
+	<li id="_id">
+			{{#if editing_question}}
+				<input class="edquestion" type="text"  value="{{question}}" />
+			{{else}}
+				<span class="question">{{question}}</span>
+			{{/if}}
+				<span class="del">(X)</span>
+				{{> showitem}}
+		</li>
+		{{> newItem}}
+		<br/>
+</template>
+
+<template name="showitem">
+	<ul>
+	{{#each option}}
+		{{> item}}
+	{{/each}}
+	</ul>	
+</template>
+
+<template name="item">
+	<li id="{{item}}">
+			{{#if editing_item}}
+				<input class="editem" type="text" value="{{item}}" />
+			{{else}}
+					<span class="item">{{item}}</span>
+			{{/if}}
+				<span class="itemdel">&nbsp;(x)</span>
+		</li>
+		<br/>
+	</template>
+
+<template name="newItem">
+	{{#if newitem}}
+		<input class="ednewitem" type="text" value=" "/>
 	{{else}}
-		<div class="modifyques btn btn-default" >修改问题</div>
-	{{/if}}
-		<div class="deleteques btn btn-default">删除问题</div>
-		{{#if add_answer}}
-		<input type="text" class="editanswer" id="edit-new-answer" value=" " />
-	{{else}}
-		<div class="addanswer btn btn-default">添加新答案选项</div>
+		<button class="newplus btn btn-default">增加新选项</button>
 	{{/if}}
 </template>

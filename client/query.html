@@ -1,93 +1,30 @@
 <head>
-  <title>Queries design</title>
+  <title>hosquery</title>
 </head>
 
 <body>
-	<div id="main-pane">
-    <div style="float: right; margin-right :20px;">
-		{{> loginButtons align="right"}}
-	</div>
-		<h3>题目</h3>
-		{{> questions}}
-	</div>
-	<div id="side-pane">
-		<h3>问题类型</h3>
-		{{> questionType}}
-	</div>
+  <div style="float: right; margin-right :20px;">
+    {{> loginButtons align="right"}}
+  </div>
+  {{> list}}
 </body>
 
-<template name="questionType">
-	<div id="questionTypes">
-		<ul>
-			<li>
-				<h4>多选问题</h4>
-					{{#if new_more_ans}}
-						<input type="text" id="add-question1" value=" " />
-					{{else}}
-						<div class="btn btn-default" id="btnNewMore">&plus;</div>
-					{{/if}}
-					<br/><br/>
-			</li>
-			<li>
-				<h4>单选问题</h4>
-					{{#if new_one_ans}}
-						<input type="text" id="add-question2" value=" " />
-					{{else}}
-						<div class="btn btn-default" id="btnNewOne">&plus;</div>
-					{{/if}}
-					<br/><br/>
-			</li>
-			<li>
-				<h4>问答题</h4>
-					{{#if new_free_ans}}
-						<input type="text" id="add-question3" value=" " />
-					{{else}}
-						<div class="btn btn-default" id="btnNewFree">&plus;</div>
-					{{/if}}
-					<br/><br/>
-			</li>
-		</ul>
-	</div>
+<template name="list">
+  {{#if administrator}}
+  	{{> design}}
+  {{else}}
+    {{#if ordinary}}
+  	   {{>normal}}
+     {{else}}
+      {{> hello}}
+    {{/if}}
+  {{/if}}
 </template>
 
-
-<template name="questions">
-	<div id="questions">
-		<p class="warining"><em>对题目进行编辑前请先选中该题目</em></p>
-		<ol>
-		{{#each ques}}
-			<li id="question">
-				<div class="btn btn-inverse" id="btnquestion">{{question}}</div>
-				{{> modify_question}}
-				<br/>
-				<br/>
-				{{#if more_answers}}
-					 {{#each item}}
-            <div class="answer-list">
-              <form class="form-inline" role="form">
-					  	<label><input type="checkbox" value=""/>{{this}}</label>
-              <button type="button" class="close delete_item" id="{{this}}">x</button>
-              </form>
-            </div>
-					{{/each}}
-				{{/if}}
-
-				{{#if one_answer}}
-					{{#each item}}
-            <div class="answer-list">
-              <form class="form-inline" role="form">
-					   	<label><input type="radio" value=""/>{{this}}	</label>
-					   	<button type="button" class="close delete_item" id="{{this}}">x</button>
-              </form>
-           </div>
-					{{/each}}
-				{{/if}}
-
-				{{#if free_answer}}
-					<label><input type="text"  value=" " /></label>
-				{{/if}}
-			</li><br/>
-		{{/each}}
-	</ol>
-</div>
-</template>
+<template name="hello">
+  <div class="container">
+    <h3 class="text-center">Welcome to our query!</h3>
+    <br/>
+    <p class="text-center">Please sign in.</p>
+  </div>
+  </template>

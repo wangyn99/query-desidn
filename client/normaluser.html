@@ -1,0 +1,55 @@
+<template name="normal">
+	<div class="container">
+		<h3>病友（出院）调查问卷</h3>
+		{{> head}}
+		{{> personinfo}}
+		{{> question_list}}
+	</div>
+</template>
+
+<template name="head">
+		{{#with notes}}
+			<p>{{text}}</p>
+		{{/with}}
+</template>
+
+<template name="personinfo">
+	<div>
+		<span><strong>性别:</strong></span>
+		<span><input type="text" id="fm" value=" "/></span>
+		<span><strong>年龄:</strong></span>
+		<span><input type="text" id="age" value=" "/></span>
+		<span><strong>部门:</strong></span>
+		<span><input type="text" id="dep" value=" "/></span>
+		<span><button type="button" id="sub">提交</button></span>
+	</div>
+</template>
+
+<template name="question_list">
+	<h3>请对下面的问题作出回答。</h3>
+	<ol>
+		{{#each questions}}
+			{{>questionshow}}
+		{{/each}}
+	</ol>
+</template>
+
+<template name="questionshow">
+	<li>
+		<form action="" >{{question}}
+			{{#if typetwo}}
+				<span><input type="text" id="answerbox" value=" "/></span>
+				<ul>
+					{{#each answer}}
+						<li>{{item}}</li>
+					{{/each}}
+				</ul>
+					{{else}}
+				{{#each answer}}
+				<label><input type="radio" class="myoption" value=""/>{{item}}
+					<em>(比重：{{score}})</em></label>
+				{{/each}}
+			{{/if}}
+		</form>
+	</li>
+</template>
