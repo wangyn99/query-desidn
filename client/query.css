@@ -25,7 +25,7 @@ body, input {
 }
 #main-pane {
     top: 0;
-    right:80px;
+    right:0;
     bottom: 0;
     left: 220px;
     overflow: auto;
@@ -38,4 +38,28 @@ body, input {
     background: #eee;
     border-right: 1px solid #999;
     background: #ddd;
-}/* CSS declarations go here */
+}
+.loginInfo{
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+#mydiv{
+   width:300px; 
+   height:200px; 
+   position:absolute; 
+   left:50%; 
+   top:50%; 
+   margin:-100px 0 0 -150px
+}
+p { 
+    text-indent:2em;
+     padding:0px;
+      margin:0px;
+    }
+.mysmall{
+  text-indent:5em;
+}
+
+
+/* CSS declarations go here */

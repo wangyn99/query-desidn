@@ -3,28 +3,46 @@
 </head>
 
 <body>
-  <div style="float: right; margin-right :20px;">
-    {{> loginButtons align="right"}}
-  </div>
-  {{> list}}
+  {{> login}}
 </body>
 
-<template name="list">
-  {{#if administrator}}
-  	{{> design}}
-  {{else}}
-    {{#if ordinary}}
-  	   {{>normal}}
-     {{else}}
-      {{> hello}}
+<template name="login">
+  {{#if currentUser}}
+    {{#if administrator}}
+      {{> design}}
+    {{else}}
+      {{>normal}}
     {{/if}}
+  {{else}}
+    <div id="mydiv">
+      <h3> Welcome! </h3>
+      <br/>
+      {{#if loggingIn}}
+        <p>Logging in ...</p>
+      {{else}}
+        {{#if creatingAccount}}
+          {{> newAccountForm}}
+        {{else}}
+          {{> loginForm}}
+        {{/if}}
+      {{/if}}
+  </div>
   {{/if}}
 </template>
 
-<template name="hello">
-  <div class="container">
-    <h3 class="text-center">Welcome to our query!</h3>
-    <br/>
-    <p class="text-center">Please sign in.</p>
-  </div>
-  </template>
+<template name="newAccountForm">
+  <input type="text" id="email" placeholder="邮箱" />
+  <input type="text" id="name" placeholder="姓名" />
+  <input type="text" id="username" placeholder="用户名" />
+  <input type="password" id="password" placeholder="密码" />
+  <button id="createaccount">创建账户</button>
+  <p id="loginform">(登陆)</p>
+</template>
+
+<template name="loginForm">
+  <input type="text" id="username" placeholder="用户名" />
+  <input type="password" id="password" placeholder="密码" />
+  <button id="login">登陆</button>
+  <p id="accountform">(创建新账户)</p>
+</template>
+

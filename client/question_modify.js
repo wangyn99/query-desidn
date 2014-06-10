@@ -1,6 +1,12 @@
 Session.setDefault("addquestion",false);
 Session.setDefault("currentType",null);
 
+Template.design.events({
+    'click #logout': function(){
+      Meteor.logout();
+    }
+});
+
 Template.questionType.type = function(){
 	return QuestionTypes.find();
 };

@@ -4,7 +4,7 @@ Meteor.subscribe("hitems");
 Meteor.subscribe("answers");
 Meteor.subscribe("headinformation");
 Meteor.subscribe("userinfo");
-Template.list.administrator = function(){
+Template.login.administrator = function(){
   return(adminUser(Meteor.userId()));
 };
 
@@ -13,14 +13,29 @@ function adminUser(userId){
   var admUser = Meteor.users.findOne({username:"admin"});
   return (userId&&admUser&&userId===admUser._id);
 };
-Template.list.ordinary = function(){
-  if(Meteor.userId()){
-    return true;
-  }
- else 
-   return false;
-};
+Template.login.creatingAccount = function(){
+    return Session.get("creatingAccount");
+  };
 
-Accounts.ui.config({
-  passwordSignupFields: 'USERNAME_AND_OPTIONAL_EMAIL'
-});
+  Template.login.events({
+    'click #loginform': function(e,t){
+      Session.set('creatingAccount',false);
+    },
+    'click #accountform': function(){
+      Session.set('creatingAccount',true);
+    },
+    'click #createaccount': function(e,t){
+      Session.set('creatingAccount',false);
+      Accounts.createUser({
+        username:t.find("#username").value,
+        password:t.find("#password").value,
+        email:t.find("#email").value,
+        profile:{
+          name: t.find("#name").value
+        }
+      });
+    },
+    'click #login': function(e,t){
+      Meteor.loginWithPassword(t.find("#username").value,t.find("#password").value);
+    }
+  });

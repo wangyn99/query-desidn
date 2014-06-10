@@ -1,8 +1,11 @@
+Template.normal.events({
+	  'click #logout': function(){
+      Meteor.logout();
+    }
+});
 Template.head.notes = function(){
 	return HeadInformation.findOne();
-}
-
-
+};
 Template.personinfo.events({
 	'click #sub': function(e,t){
 		var sex = t.find("#fm").value;
@@ -14,14 +17,14 @@ Template.personinfo.events({
 
 Template.question_list.questions = function(){
 	return HQuestions.find();
-}
+};
 
 Template.questionshow.typetwo = function(){
 	return (this.type==="2");
-}
+};
 Template.questionshow.answer = function(){
 	return HItems.find({questionid:this._id});
-}
+};
 Template.questionshow.percent = function(){
 	return this.score;
 };
