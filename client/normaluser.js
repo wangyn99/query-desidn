@@ -36,7 +36,7 @@ Template.questionshow.events({
 			Answers.insert({owner:Meteor.userId(),questionid:this._id,answer:ans});
 		}
 	},
-	'click .myoption':function(e,t){
+	'click #myoption':function(e,t){
 		Answers.insert({owner:Meteor.userId(),questionid:this.questionid,answer:this._id});
 		var total = Answers.find({questionid:this.questionid}).count();
 		var num = Answers.find({questionid:this.questionid,answer:this._id}).count();
